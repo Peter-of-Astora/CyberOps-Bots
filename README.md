@@ -5,13 +5,13 @@ The CyberOps-Bots framework is a hierarchical multi-agent system designed to enh
 
 The framework operates through three coordinated layers:
 
-1. **Env Layer**: Simulates a dynamic adversarial cloud environment where attackers perform lateral movement across virtual subnets. 	We use YawningTitan to implement that.
-2. **LLM Layer**: Serves as the global decision-maker, integrating four modules:
-    1. **Perception**: Converts structured network states into natural language descriptions.
-    2. **Planning**: Employs the ReAct paradigm for multi-step reasoning and tactical planning.
-    3. **Memory**: Tracks attack chains via Short-Term Memory (STM) and Long-Term Memory (LTM) for proactive defense.
-    4. **Action/Tool Integration**: Dispatches tactical commands to lower-layer RL agents.
-3. **RL Layer**: Comprises pre-trained, functionally heterogeneous RL agents (e.g., Fortify, Recover, Purge, Block) that execute atomic defense actions (e.g., patching, isolating, resetting nodes) within localized subnets.
+1.  **Env Layer**: Simulates a dynamic adversarial cloud environment where attackers perform lateral movement across virtual subnets. We use YawningTitan to implement that.
+2.  **LLM Layer**: Serves as the global decision-maker, integrating four modules:
+    1.  **Perception**: Converts structured network states into natural language descriptions.
+    2.  **Planning**: Employs the ReAct paradigm for multi-step reasoning and tactical planning.
+    3.  **Memory**: Tracks attack chains via Short-Term Memory (STM) and Long-Term Memory (LTM) for proactive defense.
+    4.  **Action/Tool Integration**: Dispatches tactical commands to lower-layer RL agents.
+3.  **RL Layer**: Comprises pre-trained, functionally heterogeneous RL agents (e.g., Fortify, Recover, Purge, Block) that execute atomic defense actions (e.g., patching, isolating, resetting nodes) within localized subnets.
 
 # Requirements
 + Python = 3.9
@@ -23,24 +23,24 @@ The framework operates through three coordinated layers:
 + Method 2: Modify `query.py` to deploy a local LLM for more efficient inference.
 
 ## Context
-<font style="color:rgb(55, 65, 81);">Define the network scenarios in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">prompts/subnet_context.txt</font>**`<font style="color:rgb(55, 65, 81);">, with information for each network segment written line by line.</font>
+Define the network scenarios in `prompts/subnet_context.txt`, with information for each network segment written line by line.
 
 ## Tools
-<font style="color:rgb(55, 65, 81);">Configure the lower-level RL agents, along with their corresponding tool descriptions and parameter formats, in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">prompts/tool_list.py</font>**`<font style="color:rgb(55, 65, 81);">.</font>
+Configure the lower-level RL agents, along with their corresponding tool descriptions and parameter formats, in `prompts/tool_list.py`.
 
 ## Heterogeneous Separated Pre-training
-1. <font style="color:rgb(55, 65, 81);">Design the sub-observation functions for lower-level RL agents in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">net_env.py</font>**`<font style="color:rgb(55, 65, 81);"> (implemented as </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">iso_observe()</font>**`<font style="color:rgb(55, 65, 81);">, </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">recover_observe()</font>**`<font style="color:rgb(55, 65, 81);">, etc., in the uploaded code).</font>
-2. <font style="color:rgb(55, 65, 81);">Design the sub-action execution transfer function</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">action_transfer()</font>**`<font style="color:rgb(55, 65, 81);"> </font><font style="color:rgb(55, 65, 81);">for lower-level RL agents in</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">net_env.py</font>**`<font style="color:rgb(55, 65, 81);">.</font>
-3. <font style="color:rgb(55, 65, 81);">Design the reward functions for lower-level RL agents in</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">net_env.py</font>**`<font style="color:rgb(55, 65, 81);">.</font>
-4. <font style="color:rgb(55, 65, 81);">Design the termination condition and reset functions for lower-level RL agents in</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">net_env.py</font>**`<font style="color:rgb(55, 65, 81);"> </font><font style="color:rgb(55, 65, 81);">(implemented as</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">iso_reset()</font>**`<font style="color:rgb(55, 65, 81);"> </font><font style="color:rgb(55, 65, 81);">and</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">judge_terminate()</font>**`<font style="color:rgb(55, 65, 81);"> </font><font style="color:rgb(55, 65, 81);">in the uploaded code).</font>
-5. <font style="color:rgb(55, 65, 81);">Specifically configure the training workflow and scenario settings for each lower-level RL agent in</font><font style="color:rgb(55, 65, 81);"> </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">sub_env.py</font>**`<font style="color:rgb(55, 65, 81);">, including attack strategies, number of attackers, network scale, node configurations, and training algorithms.</font>
-6. <font style="color:rgb(55, 65, 81);">Use </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">train_sub_agent</font>**`<font style="color:rgb(55, 65, 81);"> and </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">test_sub_agent</font>**`<font style="color:rgb(55, 65, 81);"> in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">sub_env.py</font>**`<font style="color:rgb(55, 65, 81);"> to train and test the RL agents. The pre-trained agent parameters will be saved in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">rl_models</font>**`<font style="color:rgb(55, 65, 81);">.</font>
+1.  Design the sub-observation functions for lower-level RL agents in `net_env.py` (implemented as `iso_observe()`, `recover_observe()`, etc., in the uploaded code).
+2.  Design the sub-action execution transfer function `action_transfer()` for lower-level RL agents in `net_env.py`.
+3.  Design the reward functions for lower-level RL agents in `net_env.py`.
+4.  Design the termination condition and reset functions for lower-level RL agents in `net_env.py` (implemented as `iso_reset()` and `judge_terminate()` in the uploaded code).
+5.  Specifically configure the training workflow and scenario settings for each lower-level RL agent in `sub_env.py`, including attack strategies, number of attackers, network scale, node configurations, and training algorithms.
+6.  Use `train_sub_agent` and `test_sub_agent` in `sub_env.py` to train and test the RL agents. The pre-trained agent parameters will be saved in `rl_models`.
 
 ## Run
-<font style="color:rgb(55, 65, 81);">Use the </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">WorkFlowRunner</font>**`<font style="color:rgb(55, 65, 81);"> class in </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">workflow_runner.py</font>**`<font style="color:rgb(55, 65, 81);"> to execute the workflow.</font>
+Use the `WorkFlowRunner` class in `workflow_runner.py` to execute the workflow.
 
 ## Human Instructions Integration
-<font style="color:rgb(55, 65, 81);">Modify </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">prompts/user_prompt.txt</font>**`<font style="color:rgb(55, 65, 81);"> or </font>`**<font style="color:rgb(17, 24, 39);background-color:rgb(236, 236, 236);">prompts/sys_prompts.txt</font>**`<font style="color:rgb(55, 65, 81);"> to inject human instructions or additional prior knowledge.</font>
+Modify `prompts/user_prompt.txt` or `prompts/sys_prompts.txt` to inject human instructions or additional prior knowledge.
 
 ## Baselines
 + Configs: See YAML files in `configs`
