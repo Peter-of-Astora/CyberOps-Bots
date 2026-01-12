@@ -1,0 +1,10 @@
+1.Central server subnet hosting critical services for the entire organization. Includes web servers, database servers, and other infrastructure servers.
+2.Research and Development department. This subnet generates internal R&D traffic and accesses internal servers. Hosts various client workstations used by researchers.
+3.Management Department. Handles administrative functions and internal communications. Traffic may include access to financial records and management systems.
+4.Technician Department. Responsible for technical support and infrastructure monitoring. May have higher network privileges and generate different traffic patterns.
+5.Secretary and Operation Department. Handles day-to-day operational tasks, external communications, and customer-facing activities.
+6.Building Management Subnet: Controls building utilities including HVAC, lighting, and access control systems.
+7.Video Surveillance Subnet: Operates IP cameras and recording servers for physical security monitoring.
+8.DMZ/External Services Subnet: Hosts internet-facing services like remote monitoring portals and VPN gateways.
+9.Wireless Sensor Network: Comprises low-power non-IP devices using protocols like Zigbee or LoRaWAN for specialized sensing.
+10.Development/Test Subnet: Isolated environment for testing new IoT devices and applications before production deployment.

@@ -1,0 +1,7 @@
+The observation contains the following metrics for assessing subnet status:
+1.Critical Distance: The number of hops from compromised nodes to the nearest critical node. Indicates the urgency level of a subnet (smaller distance = higher urgency, -1 means critical node cannot be reached by attacker).
+2.Penetration Speed: The speed at which attackers are spreading within the subnet.
+3.Isolated Nodes Count: The number of currently isolated nodes, reflecting the impact on network availability.
+4.Compromised Nodes Count: The number of nodes currently under attacker control, indicating the severity of the breach.
+5.Attack Path Concentration: Measures whether attacker activity is focused on a few paths (high concentration) or dispersed (low concentration).
+Observation:
