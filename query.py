@@ -10,7 +10,7 @@ def llm_query(prompt, last_message=None, system_prompt=None):
     :param system_prompt: 系统提示词，用于设置AI的行为和角色
     :return: AI回复内容,以及这一次的对话历史（用于传入下一次对话）
     """
-    url = "https://api.siliconflow.cn/v1/chat/completions"
+    url = "https://api.siliconflow.cn/v1/chat/completions"  # Modify the URL
     
     # 构造消息列表
     messages = []
@@ -43,7 +43,7 @@ def llm_query(prompt, last_message=None, system_prompt=None):
         "thinking_budget": 512,  # 限制思考的token数 
     }
     headers = {
-        "Authorization": "Bearer sk-aqppgeyykgcwoyzydfdxezvfehzqggwmgjahureghjduugvy",
+        "Authorization": "Bearer Your API Key",  # Use Your Key Here
         "Content-Type": "application/json"
     }
 
