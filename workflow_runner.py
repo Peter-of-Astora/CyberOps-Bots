@@ -32,7 +32,7 @@ class WorkFlowRunner():
         self.reset_agent = DQN.load('/root/work/project/rl_models/reset_agent', env=self.sub_env)
         # 短期记忆：上一次的对话记录
         self.short_term_memory = None
-        # 长期记忆：保存最深攻击链与对应的深度（可选）
+        # 长期记忆：保存攻击链与对应的深度（可选）
         self.long_term_memory = None
         # 状态空间指标变量，以属性保存方便计算差值
         self.depths = []  # 渗透深度：关键节点到攻陷节点的距离，注意是越小渗透越深
@@ -66,9 +66,6 @@ class WorkFlowRunner():
         iso_nums = []  # 隔离节点
         compromised_nums = []  # 攻陷节点
         concentrations = []  # 攻击链集中度
-        # 再增加体系性，分不同的体系设计指标，再参考论文，分不同的方面来写，更有条理（也不用太多）
-        # 只依赖这些数值与指标直接进行上层决策，没有体现大模型的作用，其实可以用规则来替代，大模型适合理解抽象/宏观的东西，直接用这些指标去掉了太多信息
-        # 攻防场景（资产、威胁等）更重要，更需要去设计提示词
         # 遍历各子网计算
         for interface in interfaces:
             # 计算各子网渗透深度
