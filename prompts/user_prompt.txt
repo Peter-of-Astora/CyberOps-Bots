@@ -1,7 +1,21 @@
 The observation contains the following metrics for assessing subnet status:
-1.Critical Distance: The number of hops from compromised nodes to the nearest critical node. Indicates the urgency level of a subnet (smaller distance = higher urgency, -1 means critical node cannot be reached by attacker).
-2.Penetration Speed: The speed at which attackers are spreading within the subnet.
-3.Isolated Nodes Count: The number of currently isolated nodes, reflecting the impact on network availability.
-4.Compromised Nodes Count: The number of nodes currently under attacker control, indicating the severity of the breach.
-5.Attack Path Concentration: Measures whether attacker activity is focused on a few paths (high concentration) or dispersed (low concentration).
+#### Identify
+Subnet Exposure Surface: {C_exp}
+Entry Node Count (The number of nodes accessible from external attacks, quantifying the initial size of the attack surface.): {entry_node_count} 
+#### Protect
+Subnet Vulnerability Profile: {C_vul}
+Average Vulnerability (Quantifies the subnet's overall vulnerability level.): {average_vulnerability}
+Compromised Node Count (The number of nodes currently in a compromised state, measuring the extent of damage.): {compromised_node_count}
+#### Detect
+Attack Chain Concentration (Measures attack strategy concentration via information entropy. Lower entropy means a more deterministic strategy.): {attck_chain_concentration}
+Attack Frequency (The average number of attacks per subnet over a time interval.): {attack_frequency}
+#### Respond
+HVN Count (The number of High-Value Nodes.): {HVN_count}
+Critical Distance (The shortest path from compromised nodes to HVNs, reflecting immediate threat urgency.): {critical_distance}
+Penetration Speed (The rate of change in Critical Distance. Positive values indicate attack progression; negative values imply effective defense.): {penetration_speed}
+#### Recover
+Subnet Service Continuity: {C_svc}
+Isolated Node Count (The number of nodes currently isolated.): {isolated_node_count}
+Connectivity (The ratio of actual edges to maximum possible edges in the subnet.): {connectivity}
+
 Observation:
